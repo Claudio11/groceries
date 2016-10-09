@@ -8,10 +8,12 @@ import { ListComponent } from './components/container/list/list.component';
 import { TaskListComponent } from './components/presentational/taskList/taskList.component';
 import { TaskRowComponent } from './components/presentational/taskRow/taskRow.component';
 
+import { routing } from './app.routes';
+
 // TODO: Make modules for each page, research best approach for modules separation.
 
 @NgModule({
-  imports: [ BrowserModule, FormsModule ],
+  imports: [ BrowserModule, FormsModule, routing ],
   declarations: [ AppComponent, ListComponent, TaskListComponent, TaskRowComponent ],
   bootstrap: [ AppComponent ]
 })
