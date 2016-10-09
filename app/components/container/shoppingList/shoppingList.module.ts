@@ -1,15 +1,21 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-// import { TaskListComponent } from '../../presentational/taskList/taskList.component';
+import { ShoppingListDetailComponent } from './shoppingListDetail.component';
+import { ShoppingListCatalogComponent } from './shoppingListCatalog.component';
 
-// import { ListComponent } from './list.component';
-
+import { ShoppingListRoutingModule } from './shoppingList.routes';
 
 @NgModule({
-  imports: [ BrowserModule ],
-  declarations: [  ],
-  bootstrap: [  ]
+  imports: [ BrowserModule,
+             ShoppingListRoutingModule],
+  declarations: [
+      ShoppingListDetailComponent,
+      ShoppingListCatalogComponent
+  ],
+  providers: [
+    // HeroService
+  ]
 })
 
 export class ShoppingListModule { }

@@ -1,9 +1,8 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ShoppingListRoutingModule } from './components/container/shoppingList/shoppingList.routes';
 
-import { ShoppingListRoutes } from './components/container/shoppingList/shoppingList.routes';
-// import { DogListComponent } from './dogs/dog-list.component';
 import { ShoppingListDetailComponent } from './components/container/shoppingList/shoppingListDetail.component';
 
 // Route Configuration
