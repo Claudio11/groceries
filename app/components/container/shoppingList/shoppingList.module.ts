@@ -3,15 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ShoppingListDetailComponent } from './shoppingListDetail.component';
 import { ShoppingListCatalogComponent } from './shoppingListCatalog.component';
+import { TaskListComponent } from '../../presentational/taskList/taskList.component';
+import { TaskRowComponent } from '../../presentational/taskRow/taskRow.component';
 
 import { ShoppingListRoutingModule } from './shoppingList.routes';
 
 @NgModule({
-  imports: [ BrowserModule,
-             ShoppingListRoutingModule],
+  imports: [
+       BrowserModule,
+       ShoppingListRoutingModule
+  ],
   declarations: [
-      // ShoppingListDetailComponent,
-      // ShoppingListCatalogComponent
+       ShoppingListDetailComponent,
+       ShoppingListCatalogComponent,
+       TaskListComponent,
+       TaskRowComponent
   ],
   providers: [
     // HeroService
