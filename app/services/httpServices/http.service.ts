@@ -32,7 +32,7 @@ export abstract class HttpService <ClassType> {
 
     get() {
         return HttpService.http.get(this.getUrl())
-                   .map((response: Response) => <ClassType[]>response.json())  // Later change to proper type
+                   .map((response: Response) => <ClassType[]>response.json())
                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
