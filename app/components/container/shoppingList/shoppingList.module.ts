@@ -10,8 +10,8 @@ import { ShoppingListRoutingModule } from './shoppingList.routes';
   imports: [ BrowserModule,
              ShoppingListRoutingModule],
   declarations: [
-      ShoppingListDetailComponent,
-      ShoppingListCatalogComponent
+      // ShoppingListDetailComponent,
+      // ShoppingListCatalogComponent
   ],
   providers: [
     // HeroService
