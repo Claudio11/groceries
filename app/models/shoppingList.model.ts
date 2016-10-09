@@ -1,6 +1,6 @@
 import { Task } from './task.model';
 
-export class TaskList {
+export class ShoppingList {
 
     _description: string;
     _name: string;

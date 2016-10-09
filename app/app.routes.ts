@@ -2,18 +2,18 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-import { ListRoutes } from './components/container/list/list.routes';
+import { ShoppingListRoutes } from './components/container/shoppingList/shoppingList.routes';
 // import { DogListComponent } from './dogs/dog-list.component';
-import { ListComponent } from './components/container/list/list.component';
+import { ShoppingListDetailComponent } from './components/container/shoppingList/shoppingListDetail.component';
 
 // Route Configuration
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/list',
+    redirectTo: '/shoppingList',
     pathMatch: 'full'
   },
-  { path: 'list', component: ListComponent },
+  { path: 'shoppingList', component: ShoppingListDetailComponent }, // Put list of shoppingList here later
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

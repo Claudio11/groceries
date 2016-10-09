@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 
 import { AppComponent }  from './app.component';
-import { ListComponent } from './components/container/list/list.component';
+import { ShoppingListDetailComponent } from './components/container/shoppingList/shoppingListDetail.component';
 
 import { TaskListComponent } from './components/presentational/taskList/taskList.component';
 import { TaskRowComponent } from './components/presentational/taskRow/taskRow.component';
@@ -14,7 +14,7 @@ import { routing } from './app.routes';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, routing ],
-  declarations: [ AppComponent, ListComponent, TaskListComponent, TaskRowComponent ],
+  declarations: [ AppComponent, ShoppingListDetailComponent, TaskListComponent, TaskRowComponent ],
   bootstrap: [ AppComponent ]
 })
 

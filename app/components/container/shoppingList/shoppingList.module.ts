@@ -12,4 +12,4 @@ import { BrowserModule } from '@angular/platform-browser';
   bootstrap: [  ]
 })
 
-export class ListModule { }
+export class ShoppingListModule { }

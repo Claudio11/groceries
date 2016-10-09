@@ -1,29 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Task } from '../../../models/task.model';
-import { TaskList } from '../../../models/taskList.model';
+import { ShoppingList } from '../../../models/shoppingList.model';
 
 @Component({
     selector: 'task-list',
     template: `
                 <div>TaskList </div>
-                <ul *ngIf="taskListItem.tasks && taskListItem.tasks.length">
-                    <li *ngFor="let task of taskListItem.tasks">
+                <ul *ngIf="shoppingList.tasks && shoppingList.tasks.length">
+                    <li *ngFor="let task of shoppingList.tasks">
                         <task-row [task]="task" (taskDeleted)="taskDeleted(task)"></task-row>
                     </li>
                 <ul>
-                <div *ngIf="!taskListItem.tasks || !taskListItem.tasks.length">
+                <div *ngIf="!shoppingList.tasks || !shoppingList.tasks.length">
                     No tasks in the list.
                 </div>
               `
 })
 export class TaskListComponent {
-    @Input() taskListItem: TaskList;
+    @Input() shoppingList: ShoppingList;
 
     taskDeleted (task: Task) {
-        console.info('task', task);
-        console.info('this.taskListItem', this.taskListItem);
-        var index = this.taskListItem.tasks.indexOf(task);
-        this.taskListItem.tasks.splice(index, 1);
+        console.info('this.taskListItem', this.shoppingList);
+        var index = this.shoppingList.tasks.indexOf(task);
+        this.shoppingList.tasks.splice(index, 1);
     }
 }
