@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { ShoppingListModule }  from './components/container/shoppingList/shoppingList.module';
 
@@ -13,7 +14,8 @@ import { AppRoutingModule }  from './app.routes';
   imports: [ BrowserModule,
              FormsModule,
              ShoppingListModule,
-             AppRoutingModule ],
+             AppRoutingModule,
+             HttpModule ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]
 })

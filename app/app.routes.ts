@@ -8,7 +8,11 @@ import { ShoppingListDetailComponent } from './components/container/shoppingList
 @NgModule({
   imports: [
       RouterModule.forRoot([
-
+        {
+            path: '',
+            redirectTo: '/shoppingList',
+            pathMatch: 'full'
+        },
       ])
   ],
   exports: [

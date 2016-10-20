@@ -7,6 +7,7 @@ import { TaskListComponent } from '../../presentational/taskList/taskList.compon
 import { TaskRowComponent } from '../../presentational/taskRow/taskRow.component';
 
 import { ShoppingListRoutingModule } from './shoppingList.routes';
+import { HttpShoppingListService } from '../../../services/httpServices/httpShoppingList.service'
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { ShoppingListRoutingModule } from './shoppingList.routes';
        TaskRowComponent
   ],
   providers: [
-    // HeroService
+      HttpShoppingListService
   ]
 })
 

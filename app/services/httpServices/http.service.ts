@@ -2,16 +2,14 @@ import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
 
 @Injectable()
-export abstract class HttpService <ClassType> {
+export class HttpService <ClassType> {
 
-    protected _endpoint: string = 'localhost:27017';  // TODO: Get it from constants.
+    protected _endpoint: string = 'http://localhost:4000/api/';  // TODO: Get it from constants.
     protected _entityUrl: string; // To be overriden by child classes.
-
-    protected static http: Http;
 
     get entityUrl () : string {
       return this._entityUrl;
@@ -31,13 +29,14 @@ export abstract class HttpService <ClassType> {
     }
 
     get() {
-        return HttpService.http.get(this.getUrl())
-                   .map((response: Response) => <ClassType[]>response.json())
-                   .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+        console.info('HttpService.http', this);
+        return this.http.get(this.getUrl())
+                   //.map((response: Response) => <ClassType[]>response.json())
+                   //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    constructor() {
-
+    constructor(public http: Http) {
+        console.info('http inside constr', http)
     }
 
 }

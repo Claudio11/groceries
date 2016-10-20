@@ -1,27 +1,45 @@
-import { ShoppingList } from '../models/shoppingList.model';
+import { Injectable } from '@angular/core';
 
+import { ShoppingList } from '../models/shoppingList.model';
+import { HttpShoppingListService } from './httpServices/httpShoppingList.service';
+
+@Injectable()
 export class ShoppingListService {
 
-    _currentShoppingList: ShoppingList;
-    _shoppingListCatalog: ShoppingList[];
+    private _currentShoppingList: ShoppingList;
+    private _shoppingListCatalog: ShoppingList[];
 
     get currentShoppingList () : ShoppingList {
-      return this._currentShoppingList;
+        return this._currentShoppingList;
     }
 
     set currentShoppingList (currentShoppingList: ShoppingList) {
-      this._currentShoppingList = currentShoppingList;
+        this._currentShoppingList = currentShoppingList;
     }
 
     get shoppingListCatalog () : ShoppingList[] {
-      return this._shoppingListCatalog;
+        return this._shoppingListCatalog;
     }
 
     set shoppingListCatalog (shoppingListCatalog: ShoppingList[]) {
-      this._shoppingListCatalog = shoppingListCatalog;
+        this._shoppingListCatalog = shoppingListCatalog;
     }
 
-    constructor() {
+    loadCatalog () {
+        // this.httpService.get().subscribe( (result: ShoppingList[]) => {
+        //   this.dataObserver.next(result);
+        // }, (error: any) => {
+        //     console.log('Could not load artists')
+        // });
+        this.httpService.get().subscribe( (result: any) => {
+            this.currentShoppingList = result.json();
+            console.info('this.currentShoppingList', this.currentShoppingList);
+        }, (error: any) => {
+            console.log('Could not load shopping lists')
+        });
+    }
+
+    constructor(private httpService: HttpShoppingListService) {
 
     }
 

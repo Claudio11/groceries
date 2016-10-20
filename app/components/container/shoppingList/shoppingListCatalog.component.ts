@@ -1,8 +1,11 @@
+import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 import { Item } from '../../../models/item.model';
 import { Task } from '../../../models/task.model';
 import { ShoppingList } from '../../../models/shoppingList.model';
+
+import { ShoppingListService } from '../../../services/shoppingList.service';
 
 @Component({
     selector: 'shopping-list-catalog',
@@ -13,10 +16,19 @@ import { ShoppingList } from '../../../models/shoppingList.model';
                         {{shoppingList.description}}
                     </li>
                 </ul>
-              `
+              `,
+    providers: [
+          ShoppingListService
+    ]
 })
+
+@Injectable()
 export class ShoppingListCatalogComponent {
     shoppingListCatalog: ShoppingList[];
+
+    constructor (private shoppingListService: ShoppingListService) {
+        this.shoppingListService.loadCatalog();
+    }
 
     ngOnInit() {
         let item: Item = new Item('Item description.');
