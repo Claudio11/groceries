@@ -26,14 +26,9 @@ export class ShoppingListService {
     }
 
     loadCatalog () {
-        // this.httpService.get().subscribe( (result: ShoppingList[]) => {
-        //   this.dataObserver.next(result);
-        // }, (error: any) => {
-        //     console.log('Could not load artists')
-        // });
         this.httpService.get().subscribe( (result: any) => {
-            this.currentShoppingList = result.json();
-            console.info('this.currentShoppingList', this.currentShoppingList);
+            //this.currentShoppingList = result.json();
+            console.info('this.currentShoppingList', result);
         }, (error: any) => {
             console.log('Could not load shopping lists')
         });
