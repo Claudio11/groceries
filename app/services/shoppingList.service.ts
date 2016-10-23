@@ -44,7 +44,7 @@ export class ShoppingListService {
             }
             this.listSource.next(this.list);
         }, (error: any) => {
-            console.log('Could not load shopping lists')
+            console.log('Could not load shopping lists');
         });
     }
 

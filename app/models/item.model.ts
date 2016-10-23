@@ -14,7 +14,7 @@ export class Item {
     constructor(description: string)
     constructor(descriptionOrObj: string | any) {
         if (typeof descriptionOrObj === 'string') {
-            this.description = description;
+            this.description = descriptionOrObj;
         }
         else {
             this.description = descriptionOrObj.description;

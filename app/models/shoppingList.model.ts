@@ -37,14 +37,14 @@ export class ShoppingList {
         if (typeof nameOrJson === 'string') {
             this.name = nameOrJson;
             this.description = description;
-            for (var i in tasks) {
+            for (let i=0; i<tasks.length; i++) {
                 this.tasks.push(new Task(tasks[i]))
             }
         }
         else {
             this.name = nameOrJson.name;
             this.description = nameOrJson.description;
-            for (var i in nameOrJson.tasks) {
+            for (let i=0; i<nameOrJson.tasks.length; i++) {
                 this.tasks.push(new Task(nameOrJson.tasks[i]))
             }
         }

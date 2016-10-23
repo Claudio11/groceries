@@ -31,10 +31,10 @@ export class Task {
     }
 
     constructor(obj: any);
-    constructor(item: Item, active: boolean = true, quantity: number = 1)
-    constructor(itemOrObj: Item | any, active?: boolean = true, quantity?: number = 1) {
+    constructor(item: Item, active: boolean, quantity: number)
+    constructor(itemOrObj: Item | any, active?: boolean, quantity?: number) {
         if (itemOrObj instanceof Item) {
-            this.item = item;
+            this.item = itemOrObj;
             this.active = active;
             this.quantity = quantity;
         }

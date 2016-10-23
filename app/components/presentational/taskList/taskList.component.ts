@@ -21,6 +21,7 @@ export class TaskListComponent {
     @Input() shoppingList: ShoppingList;
 
     taskDeleted (task: Task) {
+        // TODO call api patch on shoppingList.
         var index = this.shoppingList.tasks.indexOf(task);
         this.shoppingList.tasks.splice(index, 1);
     }
