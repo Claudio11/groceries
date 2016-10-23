@@ -10,7 +10,7 @@ import { ShoppingListService } from '../../../services/shoppingList.service';
 @Component({
     selector: 'shopping-list-catalog',
     template: `
-                Shopping list detail...
+                Shopping list catalog...
                 <ul>
                     <li *ngFor="let shoppingList of shoppingListCatalog">
                         {{shoppingList.description}}
@@ -27,15 +27,11 @@ export class ShoppingListCatalogComponent {
     shoppingListCatalog: ShoppingList[];
 
     constructor (private shoppingListService: ShoppingListService) {
-        this.shoppingListService.subscribeToList();
-        this.shoppingListService.shoppingList$.subscribe( shoppingList => {
-            this.shoppingListCatalog = shoppingList;
-            console.info('this.shoppingListCatalog', this.shoppingListCatalog)
-        });
+        this.shoppingListService.observeList();
 
-        setTimeout(() => {
-          this.shoppingListService.aa();
-        }, 4000)
+        this.shoppingListService.list$.subscribe( list => {
+            this.shoppingListCatalog = list;
+        });
     }
 
 }

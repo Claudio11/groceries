@@ -1,26 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Item } from '../../../models/item.model';
 import { Task } from '../../../models/task.model';
 import { ShoppingList } from '../../../models/shoppingList.model';
+
+import { ShoppingListService } from '../../../services/shoppingList.service';
 
 @Component({
     selector: 'shopping-list-detail',
     template: `
                 Shopping list detail...
                 <task-list [shoppingList]="shoppingList"></task-list>
-              `
+              `,
+    providers: [
+          ShoppingListService
+    ]
 })
 export class ShoppingListDetailComponent {
     shoppingList: ShoppingList;
 
+    constructor (private route: ActivatedRoute, private shoppingListService: ShoppingListService) {
+
+    }
+
     ngOnInit() {
-        let item: Item = new Item('Item description.');
-        let task: Task = new Task(item, false);
+        this.route.params
+            .map(params => params['id'])
+            .subscribe((id) => {
+                this.shoppingListService.observeEntity(id);
 
-        let item2: Item = new Item('Coca cola');
-        let task2: Task = new Task(item2, true, 2);
-
-        this.shoppingList = new ShoppingList('NameT', 'DescT', [task, task2]);
+                this.shoppingListService.entity$.subscribe( entity => {
+                    this.shoppingList = entity;
+                });
+            });
     }
 }

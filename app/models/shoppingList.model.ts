@@ -30,10 +30,24 @@ export class ShoppingList {
       this._tasks = tasks;
     }
 
-    constructor(name: string, description: string, tasks: Task[]) {
-        this.name = name;
-        this.description = description;
-        this.tasks = tasks;
+    constructor(obj: any);
+    constructor(name: string, description: string, tasks: any[])
+    constructor(nameOrJson: any | string, description?: string, tasks?: any[]) {
+        this.tasks = [];
+        if (typeof nameOrJson === 'string') {
+            this.name = nameOrJson;
+            this.description = description;
+            for (var i in tasks) {
+                this.tasks.push(new Task(tasks[i]))
+            }
+        }
+        else {
+            this.name = nameOrJson.name;
+            this.description = nameOrJson.description;
+            for (var i in nameOrJson.tasks) {
+                this.tasks.push(new Task(nameOrJson.tasks[i]))
+            }
+        }
     }
 
 }

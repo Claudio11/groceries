@@ -8,10 +8,13 @@ import { HttpShoppingListService } from './httpServices/httpShoppingList.service
 export class ShoppingListService {
 
     private _currentShoppingList: ShoppingList;
-    private _shoppingListCatalog: ShoppingList[];
+    private _list: ShoppingList[];
 
-    private shoppingListSource = new Subject<ShoppingList[]>();
-    public shoppingList$ = this.shoppingListSource.asObservable();
+    private entitySource = new Subject<ShoppingList>();
+    private listSource = new Subject<ShoppingList[]>();
+
+    public entity$ = this.entitySource.asObservable();
+    public list$ = this.listSource.asObservable();
 
     get currentShoppingList () : ShoppingList {
         return this._currentShoppingList;
@@ -21,25 +24,41 @@ export class ShoppingListService {
         this._currentShoppingList = currentShoppingList;
     }
 
-    get shoppingListCatalog () : ShoppingList[] {
-        return this._shoppingListCatalog;
+    get list () : ShoppingList[] {
+        return this._list;
     }
 
-    set shoppingListCatalog (shoppingListCatalog: ShoppingList[]) {
-        this._shoppingListCatalog = shoppingListCatalog;
+    set list (list: ShoppingList[]) {
+        this._list = list;
     }
 
-    subscribeToList () {
+    /**
+     *  Observe the list from the http service
+     */
+    observeList () {
         this.httpService.get();
         this.httpService.list$.subscribe( (result: any) => {
-            this.shoppingListSource.next(result);
+            this.list = [];
+            for (var i in result) {
+                this.list.push(new ShoppingList(result[i]));  // Needed if we handle the list locally (is needed?, research).
+            }
+            this.listSource.next(this.list);
         }, (error: any) => {
             console.log('Could not load shopping lists')
         });
     }
 
-    aa() {
-       this.httpService.aa();
+    /**
+     *  Observe the entity from the http service
+     */
+    observeEntity (id: string) {
+        this.httpService.get(id);
+        this.httpService.entity$.subscribe( (result: any) => {
+            this.currentShoppingList = new ShoppingList(result);  // Needed if we handle the entity locally (is needed?, research).
+            this.entitySource.next(this.currentShoppingList);
+        }, (error: any) => {
+            console.log('Could not load shopping')
+        });
     }
 
     constructor(private httpService: HttpShoppingListService) {

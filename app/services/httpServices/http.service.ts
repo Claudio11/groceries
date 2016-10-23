@@ -9,11 +9,13 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class HttpService <T> {
 
-    //protected _dataObserver: Observer;
     protected _endpoint: string = 'http://localhost:4000/api';  // TODO: Get it from constants.
     protected _entityUrl: string; // To be overriden by child classes.
 
+    private entitySource = new Subject<T>();
     private listSource = new Subject<T[]>();
+
+    public entity$ = this.entitySource.asObservable();
     public list$ = this.listSource.asObservable();
 
     get entityUrl () : string {
@@ -35,17 +37,25 @@ export class HttpService <T> {
 
     /**
      *  GET for entities.
+     *
+     *  @param Id of the resource (if getting an specific record, undefined if getting the list).
      */
-    get() {
-        this.http.get(this.getUrl())
-            .map((response: Response) => <T[]>response.json())
-            .subscribe( (result: any) => {
-                this.listSource.next(result);
-            });
-    }
-
-    aa() {
-       this.listSource.next([{'description': '!!!'}])
+    get(id?: string) {
+        // TODO: Refactor this method.
+        if (id) {
+            this.http.get(this.getUrl() + '/' + id)
+                .map((response: Response) => response.json())
+                .subscribe( (result: any) => {
+                    this.entitySource.next(<T>result);
+                });
+        }
+        else {
+            this.http.get(this.getUrl())
+                .map((response: Response) => response.json())
+                .subscribe( (result: any) => {
+                    this.listSource.next(<T[]>result);
+                });
+        }
     }
 
     constructor(public http: Http) {

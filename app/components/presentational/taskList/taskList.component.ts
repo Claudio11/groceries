@@ -7,12 +7,12 @@ import { ShoppingList } from '../../../models/shoppingList.model';
     selector: 'task-list',
     template: `
                 <div>TaskList </div>
-                <ul *ngIf="shoppingList.tasks && shoppingList.tasks.length">
+                <ul *ngIf="shoppingList && shoppingList.tasks && shoppingList.tasks.length">
                     <li *ngFor="let task of shoppingList.tasks">
                         <task-row [task]="task" (taskDeleted)="taskDeleted(task)"></task-row>
                     </li>
                 <ul>
-                <div *ngIf="!shoppingList.tasks || !shoppingList.tasks.length">
+                <div *ngIf="!shoppingList || !shoppingList.tasks || !shoppingList.tasks.length">
                     No tasks in the list.
                 </div>
               `
@@ -21,7 +21,6 @@ export class TaskListComponent {
     @Input() shoppingList: ShoppingList;
 
     taskDeleted (task: Task) {
-        console.info('this.taskListItem', this.shoppingList);
         var index = this.shoppingList.tasks.indexOf(task);
         this.shoppingList.tasks.splice(index, 1);
     }

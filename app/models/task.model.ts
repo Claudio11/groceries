@@ -30,10 +30,20 @@ export class Task {
       this._active = active;
     }
 
-    constructor(item: Item, active: boolean = true, quantity: number = 1) {
-        this.item = item;
-        this.active = active;
-        this.quantity = quantity;
+    constructor(obj: any);
+    constructor(item: Item, active: boolean = true, quantity: number = 1)
+    constructor(itemOrObj: Item | any, active?: boolean = true, quantity?: number = 1) {
+        if (itemOrObj instanceof Item) {
+            this.item = item;
+            this.active = active;
+            this.quantity = quantity;
+        }
+        else {
+            this.item = new Item(itemOrObj.item);
+            this.active = itemOrObj.active;
+            this.quantity = itemOrObj.quantity;
+        }
+
     }
 
 }

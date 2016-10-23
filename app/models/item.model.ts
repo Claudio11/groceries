@@ -10,8 +10,15 @@ export class Item {
       this._description = description;
     }
 
-    constructor(description: string) {
-        this.description = description;
+    constructor (obj: any);
+    constructor(description: string)
+    constructor(descriptionOrObj: string | any) {
+        if (typeof descriptionOrObj === 'string') {
+            this.description = description;
+        }
+        else {
+            this.description = descriptionOrObj.description;
+        }
     }
 
 }
