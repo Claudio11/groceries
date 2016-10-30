@@ -29,10 +29,13 @@ export class HttpService <T> {
     /**
      *  Returns the url for the entity
      *
+     *  @param Id of the resource (if getting an specific record, undefined if getting the list).
+     *
      *  @return The url for the entity.
      */
-    getUrl () : string {
-        return this._endpoint + '/' + this.entityUrl;
+    getUrl (id: string) : string {
+        let resourceDetailUrl = (id) ? '/' + id : '';
+        return this._endpoint + '/' + this.entityUrl + resourceDetailUrl;
     }
 
     /**
@@ -41,21 +44,16 @@ export class HttpService <T> {
      *  @param Id of the resource (if getting an specific record, undefined if getting the list).
      */
     get(id?: string) {
-        // TODO: Refactor this method.
-        if (id) {
-            this.http.get(this.getUrl() + '/' + id)
-                .map((response: Response) => response.json())
-                .subscribe( (result: any) => {
-                    this.entitySource.next(<T>result);
-                });
-        }
-        else {
-            this.http.get(this.getUrl())
-                .map((response: Response) => response.json())
-                .subscribe( (result: any) => {
-                    this.listSource.next(<T[]>result);
-                });
-        }
+        let subscribeCB = (id) ? (result: any) => {
+                                   this.entitySource.next(<T>result);
+                               }
+                               : (result: any) => {
+                                   this.listSource.next(<T[]>result);
+                               }
+
+        this.http.get(this.getUrl(id))
+            .map((response: Response) => response.json())
+            .subscribe(subscribeCB);
     }
 
     constructor(public http: Http) {
