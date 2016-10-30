@@ -1,6 +1,7 @@
 import { Task } from './task.model';
+import { DbEntity } from './dbEntity.model';
 
-export class ShoppingList {
+export class ShoppingList extends DbEntity{
 
     _description: string;
     _name: string;
@@ -33,6 +34,7 @@ export class ShoppingList {
     constructor(obj: any);
     constructor(name: string, description: string, tasks: any[])
     constructor(nameOrJson: any | string, description?: string, tasks?: any[]) {
+        super(nameOrJson);
         this.tasks = [];
         if (typeof nameOrJson === 'string') {
             this.name = nameOrJson;

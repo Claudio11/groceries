@@ -1,4 +1,6 @@
-export class Item {
+import { DbEntity } from './dbEntity.model'
+
+export class Item extends DbEntity {
 
     _description: string;
 
@@ -13,6 +15,7 @@ export class Item {
     constructor (obj: any);
     constructor(description: string)
     constructor(descriptionOrObj: string | any) {
+        super(descriptionOrObj);
         if (typeof descriptionOrObj === 'string') {
             this.description = descriptionOrObj;
         }
