@@ -5,6 +5,8 @@ import { ShoppingListDetailComponent } from './shoppingListDetail.component';
 import { ShoppingListCatalogComponent } from './shoppingListCatalog.component';
 import { TaskListComponent } from '../../presentational/taskList/taskList.component';
 import { TaskRowComponent } from '../../presentational/taskRow/taskRow.component';
+import { GenericListComponent } from '../../presentational/genericList/genericList.component';
+import { GenericRowComponent } from '../../presentational/genericRow/genericRow.component';
 
 import { ShoppingListRoutingModule } from './shoppingList.routes';
 import { HttpShoppingListService } from '../../../services/httpServices/httpShoppingList.service'
@@ -18,7 +20,9 @@ import { HttpShoppingListService } from '../../../services/httpServices/httpShop
        ShoppingListDetailComponent,
        ShoppingListCatalogComponent,
        TaskListComponent,
-       TaskRowComponent
+       TaskRowComponent,
+       GenericListComponent,
+       GenericRowComponent
   ],
   providers: [
       HttpShoppingListService

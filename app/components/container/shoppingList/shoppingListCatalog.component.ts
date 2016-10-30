@@ -13,9 +13,14 @@ import { ShoppingListService } from '../../../services/shoppingList.service';
                 Shopping list catalog...
                 <ul>
                     <li *ngFor="let shoppingList of shoppingListCatalog">
-                        {{shoppingList.description}}
+                        <a href="shoppingList/{{shoppingList.id}}">{{shoppingList.description}}</a>
                     </li>
                 </ul>
+
+                <generic-list [headers]="slHeaders"
+                              [list]="shoppingListCatalog"
+                              [listAttr]="slAttrs">
+                </generic-list>
               `,
     providers: [
           ShoppingListService
@@ -25,6 +30,8 @@ import { ShoppingListService } from '../../../services/shoppingList.service';
 @Injectable()
 export class ShoppingListCatalogComponent {
     shoppingListCatalog: ShoppingList[];
+    slHeaders: any[] = [{label: 'Id', columns: 3}, {label: 'Description', columns: 4}, {label: 'Name', columns: 3}, {label: 'Actions', columns: 2}];
+    slAttrs: any[] = [{attrName: 'id', columns: 3}, {attrName: 'description', columns: 4}, {attrName: 'name', columns: 3}];
 
     constructor (private shoppingListService: ShoppingListService) {
         this.shoppingListService.observeList();
