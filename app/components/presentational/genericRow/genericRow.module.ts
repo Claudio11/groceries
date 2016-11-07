@@ -1,10 +1,10 @@
 import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { GenericRowComponent } from './genericRow.component';
 
 @NgModule({
-  imports: [ BrowserModule ],
+  imports: [ CommonModule ],
   declarations: [ GenericRowComponent ],
   exports: [ GenericRowComponent ]
 })

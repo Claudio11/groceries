@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Item } from '../../../models/item.model';
-import { Task } from '../../../models/task.model';
 import { ShoppingList } from '../../../models/shoppingList.model';
 
 import { ShoppingListService } from '../../../services/shoppingList.service';

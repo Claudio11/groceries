@@ -56,6 +56,16 @@ export class HttpService <T> {
             .subscribe(subscribeCB);
     }
 
+    /**
+     *  DELETE for entities.
+     *
+     *  @param Id of the resource to delete.
+     */
+    delete(id: string) {
+        this.http.delete(this.getUrl(id))
+            .subscribe();
+    }
+
     constructor(public http: Http) {
 
     }
