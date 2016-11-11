@@ -52,8 +52,8 @@ export class HttpService <T> {
                                }
 
         this.http.get(this.getUrl(id))
-            .map((response: Response) => response.json())
-            .subscribe(subscribeCB);
+                 .map((response: Response) => response.json())
+                 .subscribe(subscribeCB);
     }
 
     /**
@@ -63,7 +63,7 @@ export class HttpService <T> {
      */
     delete(id: string) {
         this.http.delete(this.getUrl(id))
-            .subscribe();
+                 .subscribe();
     }
 
     constructor(public http: Http) {
