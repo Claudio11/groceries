@@ -11,7 +11,8 @@ import { Component, Input, Output, EventEmitter  } from '@angular/core';
                   <div *ngFor="let element of list">
                       <generic-row [element]="element"
                                    [listAttr]="listAttr"
-                                   [actions]="actions">
+                                   [actionData]="actionData"
+                                   (manageAction)="manageAction.emit($event)">
                       </generic-row>
                   </div>
                </div>`
@@ -20,8 +21,7 @@ export class GenericListComponent {
     @Input() list: any;
     @Input() headers: any[]; // Headers of the list: Format {columns: ..., label: ..., key: ...}
     @Input() listAttr: any[]; // Name of the element attributes to display:  Format {columns: ..., attrName: ..., key: ...}
-    @Input() actions: any[];
+    @Input() actionData: any[];
 
-    //@Output() deleteSL = new EventEmitter();
-
+    @Output() manageAction = new EventEmitter();
 }

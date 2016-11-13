@@ -9,7 +9,9 @@ import { TaskListComponent } from '../../presentational/taskList/taskList.compon
 import { TaskRowComponent } from '../../presentational/taskRow/taskRow.component';
 
 import { ShoppingListRoutingModule } from './shoppingList.routes';
-import { HttpShoppingListService } from '../../../services/httpServices/httpShoppingList.service'
+import { HttpShoppingListService } from '../../../services/httpServices/httpShoppingList.service';
+import { ActionManagerService } from '../../presentational/actionList/services/actionManager.service';
+
 
 @NgModule({
   imports: [
@@ -24,7 +26,8 @@ import { HttpShoppingListService } from '../../../services/httpServices/httpShop
        TaskRowComponent
   ],
   providers: [
-      HttpShoppingListService
+      HttpShoppingListService,
+      ActionManagerService
   ]
 })
 

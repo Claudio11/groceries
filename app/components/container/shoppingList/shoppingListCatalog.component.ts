@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingList } from '../../../models/shoppingList.model';
 
 import { ShoppingListService } from '../../../services/shoppingList.service';
+import { ActionManagerService } from '../../presentational/actionList/services/actionManager.service';
 
 @Component({
     selector: 'shopping-list-catalog',
@@ -12,15 +13,14 @@ import { ShoppingListService } from '../../../services/shoppingList.service';
                 <ul>
                     <li *ngFor="let shoppingList of shoppingListCatalog">
                         <a href="shoppingList/{{shoppingList.id}}">{{shoppingList.description}}</a>
-                        <div (click)="deleteSL(shoppingList)">x</div>
                     </li>
                 </ul>
 
                 <generic-list [headers]="slHeaders"
                               [list]="shoppingListCatalog"
                               [listAttr]="slAttrs"
-                              [actions]="slActions"
-                              (deleteSL)="deleteSL()">
+                              [actionData]="slActionData"
+                              (manageAction)="manageAction($event)">
                 </generic-list>
               `,
     providers: [
@@ -31,21 +31,46 @@ import { ShoppingListService } from '../../../services/shoppingList.service';
 @Injectable()
 export class ShoppingListCatalogComponent {
     shoppingListCatalog: ShoppingList[];
-    slHeaders: any[] = [{label: 'Id', columns: 3}, {label: 'Description', columns: 4}, {label: 'Name', columns: 3}, {label: 'Actions', columns: 2}];
-    slAttrs: any[] = [{attrName: 'id', columns: 3}, {attrName: 'description', columns: 4}, {attrName: 'name', columns: 3}];
-    slActions: any = {columns: 2, actions: [{img: 'deleteImgPath', cb: 'deleteSL'}]}
+    slHeaders: any[] = [
+                        {label: 'Id', columns: 3},
+                        {label: 'Description', columns: 4},
+                        {label: 'Name', columns: 3},
+                        {label: 'Actions', columns: 2}
+                       ];
 
-    constructor (private shoppingListService: ShoppingListService) {
+    slAttrs: any[] = [
+                      {attrName: 'id', columns: 3},
+                      {attrName: 'description', columns: 4},
+                      {attrName: 'name', columns: 3}
+                     ];
+
+    slActionData: any[] = {
+                            layout: {columns: 2},
+                            actions: [
+                             {key: 'deleteSL', label: 'Delete', imgPath: 'deletePath', cb: this.deleteSL},
+                             {key: 'editSl', label: 'Edit', imgPath: 'editPath', cb: this.editSL}
+                            ]
+                       };
+
+    constructor (private shoppingListService: ShoppingListService, private actionManagerService: ActionManagerService) {
         this.shoppingListService.observeList();
-
         this.shoppingListService.list$.subscribe( list => {
             this.shoppingListCatalog = list;
         });
+
+        this.actionManagerService.createActionMap(this.slActionData.actions);
     }
 
-    deleteSL (shoppingList: ShoppingList) {
-        console.info('delete from container component', shoppingList);
-        this.shoppingListService.delete(shoppingList.id);
+    deleteSL (sl: ShoppingList) {
+        console.info('delete in container component, shopping list:', sl);
+    }
+
+    editSL (sl: ShoppingList) {
+        console.info('edit in container component, shopping list:', sl);
+    }
+
+    manageAction (payload: any) {
+        this.actionManagerService.executeAction(payload.key, payload.args);
     }
 
 }

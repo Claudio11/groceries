@@ -6,25 +6,26 @@ import { Component, Input, Output, EventEmitter  } from '@angular/core';
                     <div *ngFor="let attr of listAttr" [ngClass]="['col-md-' + attr.columns]">
                         {{element[attr.attrName]}}
                     </div>
-                    <div [ngClass]="['col-md-' + actions.columns]">
-                        <div *ngFor="let action of actions.actions" (click)="executeCb(action.cb)">
-                            {{action.img}}
-                        </div>
+                    <div [ngClass]="['col-md-' + actionData.layout.columns]">
+                        <action-list [actionData]="actionData"
+                                     (manageAction)="manageElementOnAction($event)">
+                        </action-list>
                     </div>
                </div>`
 })
 export class GenericRowComponent {
     @Input() element: any;
     @Input() listAttr: any[];
-    @Input() actions: any[];
+    @Input() actionData: any[];
 
+    @Output() manageAction = new EventEmitter();
 
-    @Output() deleteSL = new EventEmitter();
-
-    executeCb (cb: any) {
-        console.info('cb', cb);
-        console.info('element', this.element);
-        // this.deleteSL.emit();
-    }
-
+    /**
+     *  Emits the manage action from the parent component (adding the element).
+     *
+     *  @param Key related to an action.
+     */
+     manageElementOnAction (key: any) {
+         this.manageAction.emit({key: key, args: [this.element]});
+     }
 }
