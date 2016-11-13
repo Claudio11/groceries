@@ -44,7 +44,7 @@ export class ShoppingListCatalogComponent {
                       {attrName: 'name', columns: 3}
                      ];
 
-    slActionData: any[] = {
+    slActionData: any = {
                             layout: {columns: 2},
                             actions: [
                              {key: 'deleteSL', label: 'Delete', imgPath: 'deletePath', cb: this.deleteSL},
