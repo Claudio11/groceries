@@ -10,7 +10,7 @@ import { TaskRowComponent } from '../../presentational/taskRow/taskRow.component
 
 import { ShoppingListRoutingModule } from './shoppingList.routes';
 import { HttpShoppingListService } from '../../../services/httpServices/httpShoppingList.service';
-import { ActionManagerService } from '../../presentational/actionList/services/actionManager.service';
+import { ActionManagerService } from '../../presentational/actionList/actionList.module';
 
 
 @NgModule({

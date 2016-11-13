@@ -64,8 +64,10 @@ export class ShoppingListService {
     /**
      *  Deletes the entity passed by parameter.
      */
-    delete (id: string) {
-        this.httpService.delete(id);
+    delete (sl: ShoppingList) {
+        if (sl && sl.id) {
+            this.httpService.delete(sl.id);
+        }
     }
 
     constructor(private httpService: HttpShoppingListService) {

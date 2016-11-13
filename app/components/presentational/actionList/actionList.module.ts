@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ActionListComponent } from './actionList.component';
-//import { ActionsManagerService } from '../../../services/actionsManager.module';
+import { ActionManagerService } from './services/actionManager.service';
 
 @NgModule({
       imports: [ CommonModule ],
@@ -11,3 +11,7 @@ import { ActionListComponent } from './actionList.component';
 })
 
 export class ActionListModule { }
+
+export {
+    ActionManagerService
+}

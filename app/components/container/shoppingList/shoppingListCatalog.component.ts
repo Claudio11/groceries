@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 import { ShoppingList } from '../../../models/shoppingList.model';
-
 import { ShoppingListService } from '../../../services/shoppingList.service';
-import { ActionManagerService } from '../../presentational/actionList/services/actionManager.service';
+import { ActionManagerService } from '../../presentational/actionList/actionList.module';
 
 @Component({
     selector: 'shopping-list-catalog',

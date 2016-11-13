@@ -21,7 +21,7 @@ export class GenericRowComponent {
     @Output() manageAction = new EventEmitter();
 
     /**
-     *  Emits the manage action from the parent component (adding the element).
+     *  Emits the manage action from the parent component (adding the current element).
      *
      *  @param Key related to an action.
      */
