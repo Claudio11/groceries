@@ -11,6 +11,6 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent {
 
     ngOnInit () {
-
+        console.info('app init')
     }
 }

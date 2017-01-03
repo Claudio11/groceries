@@ -8,7 +8,7 @@ import { ShoppingListModule }  from './components/container/shoppingList/shoppin
 import { AppComponent }  from './app.component';
 import { AppRoutingModule }  from './app.routes';
 
-// TODO: Make modules for each page, research best approach for modules separation.
+// TODO: Make modules for each page, research best approach for modules separation (egghead io "Manage UI State with the Angular 2 Router").
 
 @NgModule({
   imports: [ BrowserModule,

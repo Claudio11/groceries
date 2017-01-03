@@ -19,18 +19,16 @@ export class ShoppingListDetailComponent {
     shoppingList: ShoppingList;
 
     constructor (private route: ActivatedRoute, private shoppingListService: ShoppingListService) {
-
+        this.shoppingListService.entity$.subscribe( sl => {
+            this.shoppingList = sl;
+        });
     }
 
     ngOnInit() {
         this.route.params
             .map(params => params['id'])
             .subscribe((id) => {
-                this.shoppingListService.observeEntity(id);
-
-                this.shoppingListService.entity$.subscribe( entity => {
-                    this.shoppingList = entity;
-                });
+                this.shoppingListService.setCurrentEntity(id);
             });
     }
 }

@@ -12,12 +12,6 @@ export class HttpService <T> {
     protected _endpoint: string = 'http://localhost:4000/api';  // TODO: Get it from constants.
     protected _entityUrl: string; // To be overriden by child classes.
 
-    private entitySource = new Subject<T>();
-    private listSource = new Subject<T[]>();
-
-    public entity$ = this.entitySource.asObservable();
-    public list$ = this.listSource.asObservable();
-
     get entityUrl () : string {
       return this._entityUrl;
     }
@@ -44,16 +38,7 @@ export class HttpService <T> {
      *  @param Id of the resource (if getting an specific record, undefined if getting the list).
      */
     get(id?: string) {
-        let subscribeCB = (id) ? (result: any) => {
-                                   this.entitySource.next(<T>result);
-                               }
-                               : (result: any) => {
-                                   this.listSource.next(<T[]>result);
-                               }
-
-        this.http.get(this.getUrl(id))
-                 .map((response: Response) => response.json())
-                 .subscribe(subscribeCB);
+        return this.http.get(this.getUrl(id)).map((response: Response) => response.json());
     }
 
     /**
@@ -62,8 +47,7 @@ export class HttpService <T> {
      *  @param Id of the resource to delete.
      */
     delete(id: string) {
-        this.http.delete(this.getUrl(id))
-                 .subscribe();
+        this.http.delete(this.getUrl(id)).subscribe();
     }
 
     constructor(public http: Http) {

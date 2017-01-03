@@ -32,12 +32,14 @@ export class ShoppingListService {
         this._list = list;
     }
 
+
     /**
-     *  Observe the list from the http service
+     *  Set the current list with the given options.
+     *
+     *  @param Options to filter/limit data.
      */
-    observeList () {
-        this.httpService.get();
-        this.httpService.list$.subscribe( (result: any) => {
+    setCurrentList (options?: any) {
+        this.httpService.get().subscribe( (result: any) => {
             this.list = [];
             for (var i in result) {
                 this.list.push(new ShoppingList(result[i]));  // Needed if we handle the list locally (is needed?, research).
@@ -49,11 +51,12 @@ export class ShoppingListService {
     }
 
     /**
-     *  Observe the entity from the http service
+     *  Set current entity
+     *
+     *  @param Id of the entity.
      */
-    observeEntity (id: string) {
-        this.httpService.get(id);
-        this.httpService.entity$.subscribe( (result: any) => {
+    setCurrentEntity (id: string) {
+        this.httpService.get(id).subscribe( (result: any) => {
             this.currentShoppingList = new ShoppingList(result);  // Needed if we handle the entity locally (is needed?, research).
             this.entitySource.next(this.currentShoppingList);
         }, (error: any) => {
@@ -68,6 +71,13 @@ export class ShoppingListService {
         if (sl && sl.id) {
             this.httpService.delete(sl.id);
         }
+    }
+
+    fakeSearch () {
+        let tempSl = this.list[0];
+        this.list = [];
+        this.list.push(tempSl);
+        this.listSource.next(this.list);
     }
 
     constructor(private httpService: HttpShoppingListService) {

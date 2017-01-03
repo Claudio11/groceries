@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 import { ShoppingList } from '../../../models/shoppingList.model';
 import { ShoppingListService } from '../../../services/shoppingList.service';
@@ -15,6 +16,8 @@ import { ActionManagerService } from '../../presentational/actionList/actionList
                     </li>
                 </ul>
 
+                <input type="text" (input)="searchTerm$.next($event.target.value)">
+
                 <generic-list [headers]="slHeaders"
                               [list]="shoppingListCatalog"
                               [listAttr]="slAttrs"
@@ -29,6 +32,8 @@ import { ActionManagerService } from '../../presentational/actionList/actionList
 
 @Injectable()
 export class ShoppingListCatalogComponent {
+
+    searchTerm$ = new Subject<string>();
     shoppingListCatalog: ShoppingList[];
     slHeaders: any[] = [
                         {label: 'Id', columns: 3},
@@ -52,12 +57,16 @@ export class ShoppingListCatalogComponent {
                        };
 
     constructor (private shoppingListService: ShoppingListService, private actionManagerService: ActionManagerService) {
-        this.shoppingListService.observeList();
+        this.shoppingListService.setCurrentList();
         this.shoppingListService.list$.subscribe( list => {
             this.shoppingListCatalog = list;
         });
 
         this.actionManagerService.createActionMap(this.slActionData.actions);
+
+        this.searchTerm$.subscribe( (searchTerm: string) => {
+            this.shoppingListService.fakeSearch();
+        });
     }
 
     deleteSL (sl: ShoppingList) {
